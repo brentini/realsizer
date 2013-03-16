@@ -17,6 +17,9 @@ RealSizer是为mobile UI设计师编写的Photoshop脚本.
 
 ### 运行 "RealSizer.jsx" ###
 
+在运行RealSizer.jsx之前, 必须要至少先打开一个设计文档, 并选择你的目标文档, 
+保证文档大小或者内容的尺寸符合你要选择的设备屏幕.
+
 双击文件, 或者从菜单 "文件 > 脚本 > 浏览" 打开文件. 
 如果要将脚本集成到Photoshop菜单, 把"RealSizer.jsx"移到Photoshop安装目录的"/Presets/Scripts/"文件内.
 在下次启动PhotoShop时, 你可以从菜单 "文件 > 脚本 > RealSizer" 运行脚本.

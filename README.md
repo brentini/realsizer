@@ -18,6 +18,9 @@ or [Calculation of monitor PPI](http://en.wikipedia.org/wiki/Pixel_density#Calcu
 
 ### Run "RealSizer.jsx" ###
 
+Before you run "RealSizer.jsx" script, must open at lest one document and select your target document, 
+Make sure that the document size or content size is match your screen size of device.
+
 Double click this file, 
 or choose File > Scripts > Browse and navigate to this file. 
 If your want to install script to PhotoShop menu, 

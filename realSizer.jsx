@@ -1,20 +1,23 @@
-﻿/*==========================================================
+/*==========================================================
 
     RealSizer
     
     Author: Ashung Hung
     Mail: ashung.hung@gmail.com
     Dribbble: dribbble.com/ashung
+    
+    THANKS:
+    
+    List of displays by pixel density:
+    http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density
+    
+    ScriptUI Window in Photoshop – Palette vs. Dialog
+    http://www.davidebarranca.com/2012/10/scriptui-window-in-photoshop-palette-vs-dialog/
 
 ==========================================================*/
 
 #target photoshop
 app.bringToFront();
-
-// List of displays by pixel density:
-// http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density
-// DPI Calculator / PPI Calculator:
-// http://members.ping.de/~sven/dpi.html
 
 var devicesDPI = [
 {'title': 'iPhone 3GS, iPod Touch', 'dpi': 163, 'resolution': [320, 480], diagonal: 3.54},
@@ -28,16 +31,39 @@ var devicesDPI = [
 {'title': 'Kindle Fire HD 7"', 'dpi': 216, 'resolution': [1280, 800], diagonal: 7},
 {'title': 'Kindle Fire HD 8.9"', 'dpi': 254, 'resolution': [1280, 800], diagonal: 8.9},
 
-{'title': 'Google Nexus 4', 'dpi': 320, 'resolution': [768, 1280], diagonal: 4.7},
+{'title': 'Google/LG Nexus 4', 'dpi': 320, 'resolution': [768, 1280], diagonal: 4.7},
 {'title': 'Google Nexus 7', 'dpi': 216, 'resolution': [1280, 800], diagonal: 7},
 {'title': 'Google Nexus S', 'dpi': 235, 'resolution': [480, 800], diagonal: 4},
-{'title': 'Galaxy Nexus', 'dpi': 316, 'resolution': [720, 1280], diagonal: 4.65},
-{'title': 'Nexus 10', 'dpi': 300, 'resolution': [2560, 1600], diagonal: 10.055},
-{'title': 'Samsung Galaxy S III', 'dpi': 306, 'resolution': [720, 1280], diagonal: 4.8},
-{'title': 'Nokia Lumia 920', 'dpi': 332, 'resolution': [1280, 768], diagonal: 4.5},
+{'title': 'Motorola Xoom', 'dpi': 149, 'resolution': [1280, 800], diagonal: 10.1},
 
+{'title': 'Samsung Galaxy S (I9000/I9001)', 'dpi': 233, 'resolution': [480, 800], diagonal: 4.0},
+{'title': 'Samsung Galaxy S II (I9100)', 'dpi': 219, 'resolution': [480, 800], diagonal: 4.27},
+{'title': 'Samsung Galaxy S III', 'dpi': 306, 'resolution': [720, 1280], diagonal: 4.8},
+{'title': 'Samsung Galaxy S IV', 'dpi': 441, 'resolution': [1080, 1920], diagonal: 5},
+{'title': 'Samsung Galaxy Nexus', 'dpi': 316, 'resolution': [720, 1280], diagonal: 4.65},
+{'title': 'Samsung Galaxy Tab', 'dpi': 171, 'resolution': [1024, 600], diagonal: 7},
+{'title': 'Samsung Galaxy Tab 7.7', 'dpi': 196, 'resolution': [1280, 800], diagonal: 7.7},
+{'title': 'Samsung Galaxy Tab 10.1', 'dpi': 149, 'resolution': [1280, 800], diagonal: 10.1},
+{'title': 'Samsung Galaxy Note', 'dpi': 285, 'resolution': [800, 1280], diagonal: 5.3},
+{'title': 'Samsung Galaxy Note II', 'dpi': 267, 'resolution': [720, 1280], diagonal: 5.55},
+{'title': 'Samsung Galaxy Note 10.1', 'dpi': 149, 'resolution': [1280, 800], diagonal: 10.1},
+{'title': 'Nexus 10', 'dpi': 300, 'resolution': [2560, 1600], diagonal: 10.055},
+
+{'title': 'Nokia Lumia 710/800', 'dpi': 252, 'resolution': [480, 800], diagonal: 3.7},
+{'title': 'Nokia Lumia 820/900', 'dpi': 217, 'resolution': [480, 800], diagonal: 4.3},
+{'title': 'Nokia Lumia 920', 'dpi': 332, 'resolution': [768, 1280], diagonal: 4.5},
+
+{'title': 'Microsoft Surface', 'dpi': 148, 'resolution': [1366, 768], diagonal: 10.1},
+{'title': 'Microsoft Surface Pro', 'dpi': 148, 'resolution': [1366, 768], diagonal: 10.1},
+
+{'title': 'BlackBerry PlayBook', 'dpi': 169, 'resolution': [1024, 600], diagonal: 7},
+{'title': 'BlackBerry Z10', 'dpi': 208, 'resolution': [1920, 1080], diagonal: 4.2},
+
+{'title': 'Oppo Find 5', 'dpi': 441, 'resolution': [1080, 1920], diagonal: 5},
 {'title': 'Xiaomi Mi1', 'dpi': 245, 'resolution': [480, 854], diagonal: 4},
-{'title': 'Xiaomi Mi2', 'dpi': 341, 'resolution': [720, 1280], diagonal: 4.3}
+{'title': 'Xiaomi Mi2', 'dpi': 341, 'resolution': [720, 1280], diagonal: 4.3},
+{'title': 'Huawei D2', 'dpi': 443, 'resolution': [1080, 1920], diagonal: 5},
+{'title': 'Huawei P1', 'dpi': 256, 'resolution': [540, 960], diagonal: 4.3}
 
 ];
 
@@ -54,18 +80,22 @@ var lang = {
         en: 'New Document for Real Size Printing',
         zh: '创建用于打印真实尺寸的图像'
     },
+    alertOpenDoc: {
+        en: 'Please open a document first.\rMake sure that the document size or content size is match your screen size of device.',
+        zh: '请先打开文档.\r保证文档大小或者内容的尺寸符合你要选择的设备屏幕.'
+    },
     about: {
         en: 'About',
         zh: '关于'
     },
     aboutText: {
-        en: 'RealSizer help mobile UI designer to display their designs at real size on computer monitor, and printing at real size.\r\rFor more information, visite https://github.com/Ashung/realsizer\r\rRealSizer 1.0 Build 2013.03.08',
-        zh: 'RealSizer用于让Mobile UI设计师在屏幕将设计显示为真实尺寸, 和创建用于打印真实尺寸的图像.\r\r详细信息请访问, https://github.com/Ashung/realsizer\r\rRealSizer 1.0 Build 2013.03.08'
+        en: 'RealSizer help mobile UI designer to display their designs at real size on computer monitor, and printing at real size.\r\rFor more information, visite https://github.com/Ashung/realsizer\r\rRealSizer 1.0 Build 2013.03.15 8:20 PM',
+        zh: 'RealSizer用于让Mobile UI设计师在屏幕将设计显示为真实尺寸, 和创建用于打印真实尺寸的图像.\r\r详细信息请访问, https://github.com/Ashung/realsizer\r\rRealSizer 1.0 Build 2013.03.15 8:20 PM'
     }
 };
 
 var layoutRes = 
-"dialog {\
+"palette {\
     text: 'RealSizer',\
     alignChildren: 'left',\
     devices: Group {\
@@ -88,9 +118,8 @@ var layoutRes =
     }\
 }";
 
+var isDone = false;
 var win = new Window(layoutRes);
-    win.center();
-
 var dpi;
 var deviceDropDownList = win.devices.select;
 var btnRealSizeView = win.actions.btnRealSizeView;
@@ -106,20 +135,23 @@ deviceDropDownList.onChange = function() {
 deviceDropDownList.selection = deviceDropDownList.items[0];
 
 btnRealSizeView.onClick = function() {
-    //alert(dpi);
     realSizeView(dpi);
 }
 
 btnRealSizePrint.onClick = function() {
-    //alert(dpi);    
     realSizeForPrint(dpi);
 }
 
     win.about.aboutText.text = localize(lang.aboutText);
     win.show();
 
+while (isDone === false) {
+    app.refresh();
+}
+
 function realSizeView(deviceDPI) {
     if(!documents.length) {
+        alert(localize(lang.alertOpenDoc));
         return;
     }
 
@@ -145,6 +177,7 @@ function realSizeView(deviceDPI) {
 
 function realSizeForPrint(deviceDPI) {
     if(!documents.length) {
+        alert(localize(lang.alertOpenDoc));
         return;
     }
 
@@ -152,7 +185,13 @@ function realSizeForPrint(deviceDPI) {
     activeDocument.selection.selectAll();
     
     // Edit - Copy Merged
-    activeDocument.selection.copy(true);
+    try {
+        activeDocument.selection.copy(true);
+    } catch(e) {
+        activeDocument.artLayers.add();
+        activeDocument.selection.copy(true);
+        activeDocument.activeLayer.remove();
+    }   
     
     // Select - Deselect
     activeDocument.selection.deselect();
@@ -187,26 +226,4 @@ function cTID(s) {
 
 function sTID(s) {
     return app.stringIDToTypeID(s);
-}
-
-function setScreenResolution(x) {
-    // Preferences - Units & Rulers - New Document Preset Resolutions - Screen Resolution
-    // a / 1in = a / 2.54cm = a/2.54 / 1cm
-    var desc1 = new ActionDescriptor();
-    var ref1 = new ActionReference();
-        ref1.putProperty(cTID('Prpr'), cTID('UntP'));
-        ref1.putEnumerated(cTID('capp'), cTID('Ordn'), cTID('Trgt'));
-        desc1.putReference(cTID('null'), ref1);
-    var desc2 = new ActionDescriptor();
-        desc2.putUnitDouble(sTID("newDocPresetScreenResolution"), cTID('#Rlt'), Math.round(x / 2.54) * 72);
-        desc1.putObject(cTID('T   '), cTID('UntP'), desc2);
-    executeAction(cTID('setd'), desc1, DialogModes.NO);
-}
-
-function monitorPPI(widthInPixels, heightInPixels, diagonalInInches) {
-    var a = widthInPixels,
-        b = heightInPixels,
-        c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-    var ppi = Math.round(c / diagonalInInches);
-    return ppi;
 }
